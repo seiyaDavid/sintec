@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic Data Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Secure Synthetic Data Generator</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Upload Original Data</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="dataFile" class="form-label">Select CSV or Excel file</label>
+                                <input class="form-control" type="file" id="dataFile" accept=".csv,.xlsx">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mb-4" id="originalDataCard" style="display: none;">
+                    <div class="card-header">
+                        <h5>Original Data Preview</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="originalDataInfo"></div>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="originalDataTable">
+                                <thead id="originalDataHead"></thead>
+                                <tbody id="originalDataBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-4" id="generateCard" style="display: none;">
+                    <div class="card-header">
+                        <h5>Generate Synthetic Data</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="generateForm">
+                            <div class="mb-3">
+                                <label for="generationMethod" class="form-label">Generation Method</label>
+                                <select class="form-select" id="generationMethod">
+                                    <option value="gaussian_copula">Gaussian Copula</option>
+                                    <option value="ctgan">CTGAN (Neural Network)</option>
+                                    <option value="copulagan">CopulaGAN (Hybrid)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">Generate Synthetic Data</button>
+                        </form>
+                        <div class="mt-3" id="generationProgress" style="display: none;">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                    style="width: 100%"></div>
+                            </div>
+                            <p class="text-center mt-2">Generating synthetic data and analyzing results...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4" id="syntheticDataCard" style="display: none;">
+                    <div class="card-header">
+                        <h5>Synthetic Data Preview</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="syntheticDataTable">
+                                <thead id="syntheticDataHead"></thead>
+                                <tbody id="syntheticDataBody"></tbody>
+                            </table>
+                        </div>
+                        <button id="downloadBtn" class="btn btn-primary mt-2">Download Synthetic Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="analysisSection" style="display: none;">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Statistical Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="analysisTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="summary-tab" data-bs-toggle="tab"
+                                    data-bs-target="#summary" type="button" role="tab">Summary</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="correlation-tab" data-bs-toggle="tab"
+                                    data-bs-target="#correlation" type="button" role="tab">Correlation Analysis</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="quality-tab" data-bs-toggle="tab" data-bs-target="#quality"
+                                    type="button" role="tab">Quality Metrics</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="visualizations-tab" data-bs-toggle="tab"
+                                    data-bs-target="#visualizations" type="button" role="tab">Visualizations</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content p-3" id="analysisTabContent">
+                            <div class="tab-pane fade show active" id="summary" role="tabpanel">
+                                <div id="summaryContent"></div>
+                            </div>
+                            <div class="tab-pane fade" id="correlation" role="tabpanel">
+                                <div id="correlationContent"></div>
+                            </div>
+                            <div class="tab-pane fade" id="quality" role="tabpanel">
+                                <div id="qualityContent"></div>
+                            </div>
+                            <div class="tab-pane fade" id="visualizations" role="tabpanel">
+                                <div id="visualizationsContent" class="row"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

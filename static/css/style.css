@@ -1,0 +1,69 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.card-header {
+    background-color: #f1f8ff;
+    border-bottom: 1px solid #e3f2fd;
+}
+
+.table {
+    font-size: 0.9rem;
+}
+
+.progress {
+    height: 20px;
+}
+
+.nav-tabs .nav-link {
+    color: #495057;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    font-weight: 500;
+}
+
+.visualization-container {
+    margin-bottom: 20px;
+}
+
+.visualization-container img {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-card h6 {
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.correlation-table th,
+.correlation-table td {
+    text-align: center;
+}
+
+.correlation-high {
+    background-color: #d4edda;
+}
+
+.correlation-medium {
+    background-color: #fff3cd;
+}
+
+.correlation-low {
+    background-color: #f8d7da;
+}
